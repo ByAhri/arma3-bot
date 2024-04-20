@@ -1,6 +1,6 @@
 const { Client, SlashCommandBuilder, EmbedBuilder, ChatInputCommandInteraction } = require("discord.js");
 const { GameDig } = require("gamedig");
-const { getArmaServer } = require("../../../functions/util");
+const { getArmaServer, secondsToHms } = require("../../../functions/util");
 require("colors");
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
         }
 
         if (info) {
-            const players = `\`${info.numplayers}/${info.maxplayers}\`\n\`\`\`js\n${info.players.map(p => `\n- ${p.name}\nscore: ${p.raw.score}`).join("\n\n")}\n\`\`\``;
+            const players = `\`${info.numplayers}/${info.maxplayers}\`\n\`\`\`js\n${info.players.map(p => `\n- ${p.name} (${secondsToHms(p.raw.time)})\nscore: ${p.raw.score}`).join("\n\n")}\n\`\`\``;
             embed = new EmbedBuilder()
             .setTitle(info.name)
             .setFields([
