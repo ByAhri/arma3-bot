@@ -10,7 +10,7 @@ module.exports = {
      */
     async deployCommands(client) {
         const commands = [];
-        
+
         fs.readdirSync(`./commands/slash`).forEach(dir => {
             const commandFiles = fs.readdirSync(`./commands/slash/${dir}/`).filter(file => file.endsWith(".js"));
             for (const file of commandFiles) {
@@ -19,7 +19,7 @@ module.exports = {
             }
         });
         const rest = new REST({ version: "10" }).setToken(client.token);
-        
+
         try {
             await rest.put(Routes.applicationCommands(client.user.id), { body: commands });
             console.log(`slash commands registered successfully for everyone !!`);
@@ -27,18 +27,6 @@ module.exports = {
             console.log(`failed to register slash commands.`, " error: ".yellow, error);
         };
         return { commands: commands, client: client }
-    },
-    /**
-     * get arma server info
-     * @returns 
-     */
-    async getArmaServer() {
-        const info = await GameDig.query({
-            type: "arma3",
-            host: process.env.ARMA_IP,
-            port: process.env.ARMA_PORT
-        });
-        return info;
     },
     /**
      * converts seconds to HH:MM:SS
@@ -49,10 +37,10 @@ module.exports = {
         let h = Math.floor(d / 3600);
         let m = Math.floor(d % 3600 / 60);
         let s = Math.floor(d % 3600 % 60);
-    
+
         let hDisplay = h > 0 ? h + ":" : "";
         let mDisplay = m > 0 ? (m < 10 && h > 0 ? "0" : "") + m + ":" : "00:";
         let sDisplay = s > 0 ? (s < 10 ? "0" : "") + s : "00";
         return hDisplay + mDisplay + sDisplay;
-    }
+    },
 }
