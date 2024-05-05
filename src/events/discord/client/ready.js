@@ -28,7 +28,7 @@ module.exports = {
             const info = await getArmaServer().catch(e => { });
             if (info) {
                 presenceData.status = "online";
-                presenceData.activities[0].name = `${info.map}`;
+                presenceData.activities[0].name = `${info.map || "no map"}`;
                 presenceData.activities[0].type = ActivityType.Competing;
             };
             client.user.setPresence(presenceData);

@@ -50,17 +50,17 @@ module.exports = {
                     },
                     {
                         name: `ping`,
-                        value: `${info.ping}`,
+                        value: `${info.ping || "0"}`,
                         inline: true
                     },
                     {
                         name: `mapa`,
-                        value: `${info.map}`,
+                        value: `${info.map || "no map"}`,
                         inline: true
                     },
                     {
                         name: `jugadores`,
-                        value: players,
+                        value: players || "no players",
                         inline: true
                     }
                 ])
